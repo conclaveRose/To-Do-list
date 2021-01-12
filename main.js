@@ -1,20 +1,34 @@
 //DOM요소 가져오기 
 const alarm = document.querySelector('.js_alarm');
 const currentTime = document.querySelector('.js_alarm h1');
+const setTime = document.querySelector('.alarm_time');
+const bgColor = document.querySelector('body');
 
-//시간단위를 한자리에서  두자리로 만들어 주는 함수 
-// function addZero(num, digit) {
-//     let zero = '';
-//     num = num.toString();
-//     if (num.length < digit) {
-//         zero += '0';
-//     }
-//     return zero + num;
-// }
-//삼항 연산자로 대체 
+// 배경색 설정 함수
+function setbgColor() {
+    if (bgColor.classList == false) {
+        bgColor.classList.add('red');
+    } else {
+        bgColor.classList.remove('red');
+    }
+};
 
 
-//날짜 정보를 얻어오는 함수 정의 
+
+// 알람시간 설정 함수
+function getAlarm() {
+    const setValue = setTime.value;
+    const date = new Date();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const current = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}`;
+    if (setValue === current) {
+        setbgColor();
+    }
+};
+
+
+//현재시간 설정 함수 
 function getTime() {
     const date = new Date();
     const hours = date.getHours();
@@ -24,14 +38,24 @@ function getTime() {
     currentTime.innerText = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 };
 
-//1초마다 getTime()을 콜백한다. 
-setInterval(() => {
-    getTime();
-}, 1000);
+
+function init() {
+    setInterval(() => {
+        getTime();
+    }, 1000);
+    setInterval(() => {
+        getAlarm();
+    }, 1000);
+
+}
+
+//함수 호출
+init();
 
 
-// 시간정보를 가져오는 함수, getTime()을 콜백하는 함수를 변수init에 할당 
 
 
 
-// 함수호출  
+
+
+
