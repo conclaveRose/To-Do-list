@@ -3,26 +3,25 @@ const alarm = document.querySelector('.js_alarm');
 const currentTime = document.querySelector('.js_alarm h1');
 
 //시간단위를 한자리에서  두자리로 만들어 주는 함수 
-function addZero(num, digit) {
-    let zero = '';
-    num = num.toString();
-    if (num.length < digit) {
-        zero += '0';
-    }
-    return zero + num;
-}
-
-
-
+// function addZero(num, digit) {
+//     let zero = '';
+//     num = num.toString();
+//     if (num.length < digit) {
+//         zero += '0';
+//     }
+//     return zero + num;
+// }
+//삼항 연산자로 대체 
 
 
 //날짜 정보를 얻어오는 함수 정의 
 function getTime() {
     const date = new Date();
-    const hours = addZero(date.getHours(), 2);
-    const minutes = addZero(date.getMinutes(), 2);
-    const seconds = addZero(date.getSeconds(), 2);
-    currentTime.innerText = `${hours}:${minutes}:${seconds}`;
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    // 두라지수를 만들기 위해 따로 함수를 정의하지 않고 삼항연산자를 이용하여 바로 정의 
+    currentTime.innerText = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 };
 
 //1초마다 getTime()을 콜백한다. 
