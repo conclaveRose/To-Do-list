@@ -15,4 +15,9 @@ body {
 
 .red {
   background-color: red;
+  color: beige;
+}
+
+.startBtn:hover {
+  cursor: pointer;
 }
