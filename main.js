@@ -22,7 +22,7 @@ function setSound() {
 }
 
 
-// 알람시간 설정 함수
+//예약한 알람시간이 되었으 때 발생할 소리와 배경 색
 function getAlarm() {
     const setValue = setTime.value;
     const date = new Date();
@@ -30,14 +30,10 @@ function getAlarm() {
     const minutes = date.getMinutes();
     const current = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}`;
 
-
-    setInterval(() => {
-        if (setValue === current) {
-            setbgColor();
-            setSound();
-        }
-    }, 1000);
-
+    if (setValue === current) {
+        setbgColor()
+        setSound()
+    }
 };
 
 
@@ -52,13 +48,12 @@ function getTime() {
     currentTime.innerText = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 };
 
-
+//실시간으로 현재 시각을 출력 
 function init() {
     setInterval(() => {
         getTime();
     }, 1000);
-
-}
+};
 
 //함수 호출
 init();
@@ -69,14 +64,16 @@ Btn.addEventListener('click', () => {
         Btn.innerText = 'Stop';
         Btn.classList.remove('startBtn');
         Btn.classList.add('stopBtn');
-        getAlarm();
+        setInterval(() => {
+            getAlarm();
+        }, 1000);
     } else {
         Btn.innerText = 'Start';
         Btn.classList.remove('stopBtn');
         Btn.classList.add('startBtn');
         window.location.reload();
     }
-})
+});
 
 
 
